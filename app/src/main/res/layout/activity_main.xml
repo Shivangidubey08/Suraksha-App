@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="@dimen/activity_margin"
+tools:context=".MainActivity">
+
+<!-- Overview category -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- Label -->
+    <TextView
+        android:text="@string/category_basicInfo"
+        style="@style/CategoryStyle" />
+
+    <!-- Input fields -->
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:paddingLeft="4dp"
+        android:orientation="vertical">
+
+        <!-- Name field -->
+        <EditText
+            android:id="@+id/edit_user_name"
+            android:hint="@string/hint_pet_name"
+            android:inputType="textCapWords"
+            style="@style/EditorFieldStyle" />
+        <EditText
+            android:id="@+id/edit_user_age"
+            android:hint="Age"
+            android:inputType="numberSigned"
+            style="@style/EditorFieldStyle" />
+        <EditText
+            android:id="@+id/edit_user_adhar"
+            android:hint="Adhar Number"
+            android:inputType="numberSigned"
+            style="@style/EditorFieldStyle" />
+        <EditText
+            android:id="@+id/edit_contact_person"
+            android:hint="Person to contact in case of emergency"
+            android:inputType="text"
+            style="@style/EditorFieldStyle" />
+        <EditText
+            android:id="@+id/edit_contact_number"
+            android:hint="Contact number of person to contact in case of emergency"
+            android:inputType="numberSigned"
+            style="@style/EditorFieldStyle" />
+        <!-- Breed field -->
+        <EditText
+            android:id="@+id/edit_user_address"
+            android:hint="User Address"
+            android:inputType="textMultiLine"
+            style="@style/EditorFieldStyle" />
+    </LinearLayout>
+</LinearLayout>
+
+<!-- Gender category -->
+<LinearLayout
+    android:id="@+id/container_gender"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- Label -->
+    <TextView
+        android:text="@string/category_medical"
+        style="@style/CategoryStyle" />
+
+    <!-- Input field -->
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/edit_user_bloodgroup"
+            android:hint="BloodGroup"
+            android:inputType="textCapWords"
+            style="@style/EditorFieldStyle" />
+        <EditText
+            android:id="@+id/edit_user_diabetes"
+            android:hint="Diabetes on last diagnosis"
+            android:inputType="numberSigned"
+            style="@style/EditorFieldStyle" />
+        <!-- Gender drop-down spinner -->
+
+    </LinearLayout>
+</LinearLayout>
+
+<!-- Measurement category -->
+<LinearLayout
+    android:id="@+id/container_policy_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Label -->
+    <TextView
+        android:text="User Mediclaim info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CategoryStyle" />
+
+    <!-- Input fields -->
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <!-- Weight field -->
+        <EditText
+            android:id="@+id/edit_policy_number"
+            android:hint="Mediclaim Policy Number"
+            android:inputType="number"
+            style="@style/EditorFieldStyle" />
+
+
+        <!-- Units for weight (kg) -->
+
+
+    </LinearLayout>
+</LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_save"
+        android:onClick="insertPet"
+        />
+    <TextView
+        android:id="@+id/result"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+</LinearLayout>
+</ScrollView>
