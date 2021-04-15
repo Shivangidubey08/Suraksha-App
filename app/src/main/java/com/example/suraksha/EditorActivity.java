@@ -103,41 +103,6 @@ public class EditorActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    public void et(View view) {
-         String name = mNameEditText.getText().toString().trim();
-         String age = mAgeEditText.getText().toString().trim();
-         String adhar =  mAdharEditText.getText().toString().trim();
-         String contactP =  mContactPersonEditText.getText().toString().trim();
-         String contactN =  mContactNumberEditText.getText().toString().trim();
-         String address =  mAddressEditText.getText().toString().trim();
-         String bloodgroup =  mBloodgroupEditText.getText().toString().trim();
-         String diabetes =  mDiabetesEditText.getText().toString().trim();
-         String policyNumber = mPolicyEditText.getText().toString().trim();
-        dbHelper dbHelper = new dbHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(UserEntry.COLUMN_USER_NAME, name);
-        values.put(UserEntry.COLUMN_AGE, age);
-        values.put(UserEntry.COLUMN_ADHAR, adhar);
-        values.put(UserEntry.COLUMN_CONTACT_PERSON, contactP);
-        values.put(UserEntry.COLUMN_CONTACT_NUMBER, contactN);
-        values.put(UserEntry.COLUMN_ADDRESS, address);
-        values.put(UserEntry.COLUMN_BLOODGROUP, bloodgroup);
-        values.put(UserEntry.COLUMN_DIABETES, diabetes);
-        values.put(UserEntry.COLUMN_POLICY_NIUMBER, policyNumber);
-
-
-        long newRowId = db.insert(UserEntry.TABLE_NAME, null, values);
-
-        if (newRowId == -1) {
-
-            Toast.makeText(this, "Error with saving data", Toast.LENGTH_SHORT).show();
-        } else {
-            startActivity(new Intent(EditorActivity.this, DataViewActivity.class));
-            Toast.makeText(this, "Saved successfully" + newRowId, Toast.LENGTH_SHORT).show();
-        }
-
-    }
     public void insertPet(View view) {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
