@@ -10,12 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Suraksha"
         >
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".DataViewActivity"
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".EditorActivity"
+            android:label="Edit"
+            android:parentActivityName=".DataViewActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DataViewActivity" />
         </activity>
         <provider
             android:name=".data.Provider"

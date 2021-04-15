@@ -41,9 +41,20 @@ public class dbHelper extends SQLiteOpenHelper{
                 + UserEntry.COLUMN_BLOODGROUP + " TEXT, "
                 + UserEntry.COLUMN_DIABETES + " TEXT, "
                 + UserEntry.COLUMN_POLICY_NIUMBER + " TEXT);";
-
+        String SQL_INSERT_DUMMY =  "INSERT INTO " + UserEntry.TABLE_NAME + " VALUES ("
+                + "1, "
+                + "NA, "
+                + "NA, "
+                + "NA, "
+                + "NA, "
+                + "NA, "
+                + "NA, "
+                + "NA, "
+                + "NA, "
+                + "NA);";
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_PETS_TABLE);
+        db.execSQL(SQL_INSERT_DUMMY);
     }
 
     /**

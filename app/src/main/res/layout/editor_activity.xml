@@ -1,72 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
     android:fillViewport="false">
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
+    android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 android:padding="@dimen/activity_margin"
-tools:context=".MainActivity">
+tools:context=".EditorActivity">
 
-<!-- Overview category -->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <!-- Label -->
-    <TextView
-        android:text="@string/category_basicInfo"
-        style="@style/CategoryStyle" />
-
-    <!-- Input fields -->
     <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:layout_weight="2"
+        android:layout_width="match_parent"
         android:paddingLeft="4dp"
         android:orientation="vertical">
-
+        <TextView
+            android:text="Name: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <!-- Name field -->
         <EditText
             android:id="@+id/edit_user_name"
             android:hint="@string/hint_pet_name"
             android:inputType="textCapWords"
             style="@style/EditorFieldStyle" />
+        <TextView
+            android:text="Age: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <EditText
             android:id="@+id/edit_user_age"
             android:hint="Age"
             android:inputType="numberSigned"
             style="@style/EditorFieldStyle" />
+        <TextView
+            android:text="Adhar Number: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <EditText
             android:id="@+id/edit_user_adhar"
             android:hint="Adhar Number"
             android:inputType="numberSigned"
             style="@style/EditorFieldStyle" />
+        <TextView
+            android:text="Contact Person in emergency: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <EditText
             android:id="@+id/edit_contact_person"
             android:hint="Person to contact in case of emergency"
             android:inputType="text"
             style="@style/EditorFieldStyle" />
+        <TextView
+            android:text="Contact Person number: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <EditText
             android:id="@+id/edit_contact_number"
             android:hint="Contact number of person to contact in case of emergency"
             android:inputType="numberSigned"
             style="@style/EditorFieldStyle" />
+        <TextView
+            android:text="Address: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <!-- Breed field -->
         <EditText
             android:id="@+id/edit_user_address"
             android:hint="User Address"
             android:inputType="textMultiLine"
             style="@style/EditorFieldStyle" />
-    </LinearLayout>
+
 </LinearLayout>
 
 <!-- Gender category -->
@@ -87,11 +108,23 @@ tools:context=".MainActivity">
         android:layout_width="0dp"
         android:layout_weight="2"
         android:orientation="vertical">
+        <TextView
+            android:text="Blood Group: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <EditText
             android:id="@+id/edit_user_bloodgroup"
             android:hint="BloodGroup"
             android:inputType="textCapWords"
             style="@style/EditorFieldStyle" />
+        <TextView
+            android:text="Diabetes on last diagnosis: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <EditText
             android:id="@+id/edit_user_diabetes"
             android:hint="Diabetes on last diagnosis"
@@ -123,6 +156,12 @@ tools:context=".MainActivity">
         android:orientation="vertical">
 
         <!-- Weight field -->
+        <TextView
+            android:text="Mediclaim Policy Number: "
+            style="@style/CategoryStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
         <EditText
             android:id="@+id/edit_policy_number"
             android:hint="Mediclaim Policy Number"
@@ -141,10 +180,6 @@ tools:context=".MainActivity">
         android:text="@string/action_save"
         android:onClick="insertPet"
         />
-    <TextView
-        android:id="@+id/result"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
+
 </LinearLayout>
 </ScrollView>
