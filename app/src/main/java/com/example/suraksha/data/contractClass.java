@@ -60,6 +60,7 @@ public class contractClass {
         public final static String COLUMN_BLOODGROUP = "bloodgroup";
         public final static String COLUMN_DIABETES = "diabetes";
         public final static String COLUMN_POLICY_NIUMBER = "policyNumber";
+        public final static String COLUMN_MEDICAL_FILE_URL = "medicalFileUrl";
 
         public static final int GENDER_UNKNOWN = 0;
         public static final int GENDER_MALE = 1;

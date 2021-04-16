@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.suraksha.data.dbHelper;
 import com.example.suraksha.data.contractClass;
 
@@ -23,6 +28,8 @@ public class DataViewActivity extends AppCompatActivity {
     private TextView bloodgroup;
     private TextView diabetes;
     private TextView policy;
+    private Uri fileUri=null;
+    private String filePath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +61,7 @@ public class DataViewActivity extends AppCompatActivity {
         return true;
     }
 
-    public void displayDatabaseInfo() {
+    private void displayDatabaseInfo() {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         String[] projection = {
@@ -67,7 +74,9 @@ public class DataViewActivity extends AppCompatActivity {
                 contractClass.UserEntry.COLUMN_ADDRESS,
                 contractClass.UserEntry.COLUMN_BLOODGROUP,
                 contractClass.UserEntry.COLUMN_DIABETES,
-                contractClass.UserEntry.COLUMN_POLICY_NIUMBER };
+                contractClass.UserEntry.COLUMN_POLICY_NIUMBER,
+                contractClass.UserEntry.COLUMN_MEDICAL_FILE_URL
+        };
 
         Cursor cursor = db.query(
                 contractClass.UserEntry.TABLE_NAME, projection, null, null, null, null, null);
@@ -81,6 +90,7 @@ public class DataViewActivity extends AppCompatActivity {
         int bloodgroupColumnIndex = cursor.getColumnIndex(contractClass.UserEntry.COLUMN_BLOODGROUP);
         int diabetesColumnIndex = cursor.getColumnIndex(contractClass.UserEntry.COLUMN_DIABETES);
         int policyColumnIndex = cursor.getColumnIndex(contractClass.UserEntry.COLUMN_POLICY_NIUMBER);
+        int medicalHistoryColumnIndex = cursor.getColumnIndex(contractClass.UserEntry.COLUMN_MEDICAL_FILE_URL);
         cursor.moveToNext();
         try {name.setText(cursor.getString(nameColumnIndex));
             age.setText(cursor.getString(ageColumnIndex));
@@ -91,11 +101,23 @@ public class DataViewActivity extends AppCompatActivity {
             bloodgroup.setText(cursor.getString(bloodgroupColumnIndex));
             diabetes.setText(cursor.getString(diabetesColumnIndex));
             policy.setText(cursor.getString(policyColumnIndex));
+            fileUri=Uri.parse(cursor.getString(medicalHistoryColumnIndex));
+            filePath=cursor.getString(medicalHistoryColumnIndex);
 
         } finally {
 
             cursor.close();
+
         }
+    }
+    public void seeMedicalHistory(View view){
+        Log.i("nevla", filePath);
+        if(filePath=="NA"){
+            Toast.makeText(this, "No Medical history added", Toast.LENGTH_SHORT).show();}
+        else{
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(fileUri,"application/pdf");
+        startActivity(Intent.createChooser(intent, "Open folder"));}
     }
 
 }

@@ -2,7 +2,13 @@ package com.example.suraksha.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import com.example.suraksha.data.contractClass.UserEntry;
+
+import com.example.suraksha.data.contractClass;
+import com.example.suraksha.data.contractClass.UserEntry;
+import com.example.suraksha.data.dbHelper;
 public class dbHelper extends SQLiteOpenHelper{
 
     public static final String LOG_TAG = dbHelper.class.getSimpleName();
@@ -40,19 +46,34 @@ public class dbHelper extends SQLiteOpenHelper{
                 + UserEntry.COLUMN_ADDRESS + " TEXT, "
                 + UserEntry.COLUMN_BLOODGROUP + " TEXT, "
                 + UserEntry.COLUMN_DIABETES + " TEXT, "
-                + UserEntry.COLUMN_POLICY_NIUMBER + " TEXT);";
-        String SQL_INSERT_DUMMY =  "INSERT INTO " + UserEntry.TABLE_NAME + " VALUES ("
+                + UserEntry.COLUMN_POLICY_NIUMBER + " TEXT, "
+                + UserEntry.COLUMN_MEDICAL_FILE_URL + " TEXT);";
+        String SQL_INSERT_DUMMY =  "INSERT INTO " + UserEntry.TABLE_NAME + " ("
+                + UserEntry._ID + ", "
+                + UserEntry.COLUMN_USER_NAME + ", "
+                + UserEntry.COLUMN_AGE + ", "
+                + UserEntry.COLUMN_ADHAR + ", "
+                + UserEntry.COLUMN_CONTACT_PERSON + ", "
+                + UserEntry.COLUMN_CONTACT_NUMBER + ", "
+                + UserEntry.COLUMN_ADDRESS + ", "
+                + UserEntry.COLUMN_BLOODGROUP + ", "
+                + UserEntry.COLUMN_DIABETES + ", "
+                + UserEntry.COLUMN_POLICY_NIUMBER + ", "
+                + UserEntry.COLUMN_MEDICAL_FILE_URL + ")\n"+"VALUES ("
                 + "1, "
-                + "NA, "
-                + "NA, "
-                + "NA, "
-                + "NA, "
-                + "NA, "
-                + "NA, "
-                + "NA, "
-                + "NA, "
-                + "NA);";
+                + "\"NA\","
+                + "\"NA\","
+                + "\"NA\","
+                + "\"NA\","
+                + "\"NA\","
+                + "\"NA\","
+                + "\"NA\","
+                + "\"NA\","
+                + "\"NA\","
+                + "\"NA\");";
         // Execute the SQL statement
+        Log.i("nevla",SQL_CREATE_PETS_TABLE);
+        Log.i("nevla",SQL_INSERT_DUMMY);
         db.execSQL(SQL_CREATE_PETS_TABLE);
         db.execSQL(SQL_INSERT_DUMMY);
     }

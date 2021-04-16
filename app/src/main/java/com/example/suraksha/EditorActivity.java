@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -21,7 +22,7 @@ import com.example.suraksha.data.contractClass.UserEntry;
 import com.example.suraksha.data.dbHelper;
 import com.example.suraksha.DataViewActivity;
 public class EditorActivity extends AppCompatActivity {
-
+    public static final int PICKFILE_RESULT_CODE = 1;
     private EditText mNameEditText;
     private EditText mAgeEditText;
     private EditText mAdharEditText;
@@ -32,6 +33,8 @@ public class EditorActivity extends AppCompatActivity {
     private EditText mDiabetesEditText;
     private EditText mPolicyEditText;
     private Uri mCurrentPetUri;
+    private Button mMedicalHistoryButton;
+    private Uri fileUri=null;
 
 
 
@@ -53,8 +56,33 @@ public class EditorActivity extends AppCompatActivity {
         mBloodgroupEditText = (EditText) findViewById(R.id.edit_user_bloodgroup);
         mDiabetesEditText = (EditText) findViewById(R.id.edit_user_diabetes);
         mPolicyEditText = (EditText) findViewById(R.id.edit_policy_number);
+        mMedicalHistoryButton = (Button) findViewById(R.id.addMedicalHistory);
+        mMedicalHistoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+                chooseFile.setType("application/pdf");
+                chooseFile = Intent.createChooser(chooseFile, "Choose a file");
+                startActivityForResult(chooseFile, PICKFILE_RESULT_CODE);
+
+            }
+        });
 
         mDbHelper = new dbHelper(this);
+    }@Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case PICKFILE_RESULT_CODE:
+                if (resultCode == -1) {
+                    fileUri = data.getData();
+                }
+
+                break;
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
     @Override
     protected void onStart() {
@@ -70,7 +98,8 @@ public class EditorActivity extends AppCompatActivity {
                 contractClass.UserEntry.COLUMN_ADDRESS,
                 contractClass.UserEntry.COLUMN_BLOODGROUP,
                 contractClass.UserEntry.COLUMN_DIABETES,
-                contractClass.UserEntry.COLUMN_POLICY_NIUMBER };
+                contractClass.UserEntry.COLUMN_POLICY_NIUMBER,
+                contractClass.UserEntry.COLUMN_MEDICAL_FILE_URL};
 
         Cursor cursor = db.query(
                 contractClass.UserEntry.TABLE_NAME, projection, null, null, null, null, null);
@@ -84,6 +113,7 @@ public class EditorActivity extends AppCompatActivity {
         int bloodgroupColumnIndex = cursor.getColumnIndex(contractClass.UserEntry.COLUMN_BLOODGROUP);
         int diabetesColumnIndex = cursor.getColumnIndex(contractClass.UserEntry.COLUMN_DIABETES);
         int policyColumnIndex = cursor.getColumnIndex(contractClass.UserEntry.COLUMN_POLICY_NIUMBER);
+
         cursor.moveToNext();
         try {mNameEditText.setText(cursor.getString(nameColumnIndex));
             mAgeEditText.setText(cursor.getString(ageColumnIndex));
@@ -115,6 +145,7 @@ public class EditorActivity extends AppCompatActivity {
         String bloodgroup =  mBloodgroupEditText.getText().toString().trim();
         String diabetes =  mDiabetesEditText.getText().toString().trim();
         String policyNumber = mPolicyEditText.getText().toString().trim();
+        String medicalHistory= fileUri.toString();
 
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
@@ -123,7 +154,7 @@ public class EditorActivity extends AppCompatActivity {
                 TextUtils.isEmpty(adhar) &&   TextUtils.isEmpty(contactP)
                 && TextUtils.isEmpty(contactN)  && TextUtils.isEmpty(address)
                 && TextUtils.isEmpty(bloodgroup)  && TextUtils.isEmpty(diabetes)
-                && TextUtils.isEmpty(policyNumber)
+                && TextUtils.isEmpty(policyNumber)&& TextUtils.isEmpty(medicalHistory)
     ) {
             // Since no fields were modified, we can return early without creating a new pet.
             // No need to create ContentValues and no need to do any ContentProvider operations.
@@ -142,6 +173,7 @@ public class EditorActivity extends AppCompatActivity {
         values.put(UserEntry.COLUMN_BLOODGROUP, bloodgroup);
         values.put(UserEntry.COLUMN_DIABETES, diabetes);
         values.put(UserEntry.COLUMN_POLICY_NIUMBER, policyNumber);
+        values.put(UserEntry.COLUMN_MEDICAL_FILE_URL,medicalHistory);
 
 
             mCurrentPetUri = ContentUris.withAppendedId(UserEntry.CONTENT_URI, 1);
