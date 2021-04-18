@@ -60,7 +60,12 @@ public class DataViewActivity extends AppCompatActivity {
         startActivity(new Intent(DataViewActivity.this, EditorActivity.class));
         return true;
     }
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
+        finish();
 
+    }
     private void displayDatabaseInfo() {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 

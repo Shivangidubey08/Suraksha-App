@@ -44,4 +44,10 @@
 
     <!-- Label for dropdown menu option if the pet is female [CHAR LIMIT=20] -->
     <string name="gender_female">Female</string>
-</resources>
+
+
+        <string name="instructions">
+Place your fingertip on the Home button to verify your identity
+</string>
+    </resources>
+
